@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="Online wikipedia page summariser that summarises wikipedia page paragraph wise along with the images">
+    <meta name="keywords" content="Wikipedia, ai, Artificial Intelligence, search, What is,AI">
+    <meta name="author" content="Nirmit Pratap Singh">
+    <meta name='owner' content='RS Enterprises'>
+    <link rel="icon" type="image/x-icon" href="{{url_for('static',filename='img/wikisaransh.png')}}">
+    <title>wikiसारांश</title>
+    <link href="{{url_for('static',filename='style/style.css')}}" rel="stylesheet" type="text/css" />
+
+  
+</head>
+
+<body>
+ 
+    <div class="main-menu">
+      <div id="menu">
+        <input type="checkbox" id="menu-toggle"/>
+        <ul>
+          <li>
+            <a href="#section1">Home</a>
+          </li><li>
+            <a href="#section2">Images </a>
+          </li><li>
+            <a href="#section3">Content</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <section class="section" id="section1">
+        <div class="homes">
+
+            <div class="home">
+                <h2 id='title'>wikiसारांश</h2>
+                <!-- social media icon -->
+                <div class="social_media"><nav class="smenu">
+                  <input type="checkbox" href="#" class="smenu-open" name="smenu-open" id="smenu-open" />
+                  <label class="smenu-open-button" for="smenu-open"></label>
+    
+                  <a href="#" class="smenu-item blue"> <i class="social social-bell"></i> </a>
+                  <a href="#" class="smenu-item green"> <i class="social social-coffee"></i> </a>
+                  <a href="#" class="smenu-item red"> <i class="social social-android"></i> </a>
+                  <a href="#" class="smenu-item purple"> <i class="social social-home"></i> </a>
+                  <a href="#" class="smenu-item orange"> <i class="social social-star"></i> </a>
+                  <a href="#" class="smenu-item lightblue"> <i class="social social-comment"></i> </a>
+                </nav></div>
+                <hr>
+                <p id='home_para'>An Artificial Intelligence based wikipedia page summariser</p>
+            </div>
+
+            <div class="home" id="slider">
+              <div class="slider">
+              	<input type="radio" name="testimonial" id="t-1">
+              	<input type="radio" name="testimonial" id="t-2">
+              	<input type="radio" name="testimonial" id="t-3" checked>
+              	<input type="radio" name="testimonial" id="t-4">
+              	<input type="radio" name="testimonial" id="t-5">
+              	<div class="testimonials">
+              		<label class="item" for="t-1">
+              			<h1>How to use</h2>
+                    <p>Copy the wikipedia page <strong>Title</strong> and paste it in the searchbar here</p>
+              		</label>
+              		<label class="item" for="t-2">
+              			<h1>Source</h2>
+                    <p>All the content present here is referenced with <strong>Wikipedia</strong> page </p>
+                    <p>It is summarized with the help of <strong>Artificial Intelligence</strong></p>
+              		</label>
+              		<label class="item" for="t-3">
+              			<h1>About</h2>
+                    <p>An <strong>Artificial Intelligence</strong> based <strong>Wikipedia</strong> summariser which summarises the wikipedia page <strong>paragraph</strong> wise along with the images</p>
+              		</label>
+              		<label class="item" for="t-4">
+              			<h1>Credit</h2>
+                    <p>A special thanks to <strong>Wikipedia</strong> for making this product possible</p>
+              		</label>
+              		<label class="item" for="t-5">
+              			<h1>Images</h2>
+                    <p>Gives the summary of all paragraphs of a wikipedia page.</p>
+                    <p>It also show all images present on the wikipedia page</p>
+              		</label>
+              	</div>
+              	<br/>
+              	<div class="dots">
+              		<label for="t-1"></label>
+              		<label for="t-2"></label>
+              		<label for="t-3"></label>
+              		<label for="t-4"></label>
+              		<label for="t-5"></label>
+              	</div>
+              </div>
+            </div>
+    </section>
+  
+    <section class="section" id="input_section">
+      <form action="/content_image" method="POST">
+      <div class="searchBox">
+        <input class="searchInput"type="text" name="flag" placeholder="wikipedia title--image">
+        <input class="searchButton" type="submit"  value='Search'>
+      </div>
+      </form>
+    </section>
+  
+    <section class="section" id="section2">
+        <h2 contenteditable="True">Images</h2>
+        <div class="images">
+          {% for item in data1 %}
+          <div class="image">
+					<img src={{item["link"]}}>
+					<p class="description">{{item["caption"]}}</p>
+				</div>
+         {% endfor %}
+        </div>
+    </section>
+
+    <section class="section" id="input_section2">
+      <form action="/content_summary" method="POST">
+      <div class="searchBox">
+        <input class="searchInput"type="text" name="flag" placeholder="wikipedia title--summary">
+        <input class="searchButton" type="submit"  value='Search'>
+      </div>
+      </form>
+    </section>
+  
+    <section class="section" id="section3">
+        <h2 contenteditable="True">Summary</h2>
+        <div class="contents">
+          {% for item in data2 %}
+          <div class="content">
+					<h2 class="content_title">{{item["title"]}}</h2>
+					<p class="description">{{item["content_text"]}}</p>
+				</div>
+          {% endfor %}
+        </div>
+    </section>
+
+ 
+    
+</body>
+
+</html>
